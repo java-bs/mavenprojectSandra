@@ -5,13 +5,15 @@
  */
 package com.crediloco.crediloco.dominio;
 
+import static com.crediloco.crediloco.dominio.ImprimirDatos.COLORSECUNDARIO;
 import java.math.BigDecimal;
+
 
 /**
  *
  * @author vazquez1320
  */
-public class Cliente {
+public class Cliente implements ImprimirDatos{
     public String dni;
     public String nombreApellido;
     public Domicilio domicilio;
@@ -19,16 +21,32 @@ public class Cliente {
     public DocumentoDigital[] dniDigitalizado;
     public Prestamo[] prestamos;
     
+    
+   
     public String toString(){
-        return "DNI: " + dni + "// Nombre y Apellido: " + nombreApellido + "Domicilio: " + domicilio;
+        return "DNI: " + this.dni + "// Nombre y Apellido: " + this.nombreApellido + "Domicilio: " + this.domicilio;
     }
     public void cambiarDomicilio(Domicilio newDomic){
-        domicilio = newDomic;
+        this.domicilio = newDomic;
     }
     public void actualizarIngresos(DocumentoDigital newDocu, BigDecimal monto){
-        ingresos=monto;
+        this.ingresos=monto;
     }
 
+    @Override
+    public void imprimirDatos() {
+        System.out.println("Impresión Cliente: "
+                + "Nombre = " + nombreApellido + ", ingresos = " + ingresos
+                + ". Color de impresión: " + COLORSECUNDARIO);
+
+        for (Prestamo prestamo : this.prestamos) {
+            prestamo.imprimirDatos();
+        }
+        for(int i = 0 ; i > this.prestamos.length ; i++){
+            this.prestamos[i].imprimirDatos();
+            System.out.println("indice: " + i);
+        }
+    }
     public String getDni() {
         return dni;
     }

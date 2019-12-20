@@ -11,24 +11,24 @@ import java.math.BigDecimal;
  *
  * @author vazquez1320
  */
-public class Prestamo {
-    private static BigDecimal monto;
+public class Prestamo implements ImprimirDatos {
+    private BigDecimal monto;
     public Integer plazoEnMeses;
     public Integer cantidadCuotas;
     public BigDecimal tasa;
     public DocumentoDigital[] documentos;
     
     public Prestamo (BigDecimal monto, Integer cuotas){
-        Prestamo.monto = monto;
+        this.monto = monto;
         this.cantidadCuotas = cuotas;
     }
     
     public String toString(){
-        return "Monto: " + Prestamo.monto + "//Cantidad de cuotas: " + this.cantidadCuotas;
+        return "Monto: " + this.monto + "//Cantidad de cuotas: " + this.cantidadCuotas;
     }
 
     public BigDecimal getMonto() {
-        return monto;
+        return this.monto;
     }
 
     public Integer getPlazoEnMeses() {
@@ -65,6 +65,13 @@ public class Prestamo {
 
     public void setDocumentos(DocumentoDigital[] documentos) {
         this.documentos = documentos;
+    }
+
+    @Override
+    public void imprimirDatos() {
+        System.out.println("Monto: " + this.monto + "\nTasa: " + this.tasa
+                            +"\nCantidad de cuotas: " + this.cantidadCuotas
+        );
     }
     
 }
